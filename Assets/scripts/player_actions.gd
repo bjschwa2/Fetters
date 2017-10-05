@@ -23,8 +23,7 @@ func _fixed_process(delta):
 		mousepoint = self.get_global_mouse_pos()
 		mouse_distance = self.get_pos().distance_to(mousepoint)
 		is_dragging = true
-		print(mousepoint)
-		print(mouse_distance)
+		
 
 	if not keydown_mouseleft or not mouse_is_over:
 		is_dragging = false
@@ -38,6 +37,8 @@ func _input(event):
 		print("mouse released")
 		if is_dragging:
 			self.set_linear_velocity(mousepoint)
+			print(mousepoint)
+			print(mouse_distance)
 			
 		keydown_mouseleft = false
 		is_dragging = false
