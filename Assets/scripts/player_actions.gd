@@ -1,7 +1,6 @@
 extends RigidBody2D
 
 # class member variables:
-var player
 var base
 var keydown_mouseleft = false
 var is_dragging = false
@@ -13,21 +12,20 @@ var mousepoint = Vector2(0,0)
 # Initialization here
 func _ready():
 	# Called every time the node is added to the scene.
+	Globals.set("Player", self)
 	set_process_input(true)
 	set_fixed_process(true)
 	base = get_node("Base")
-	#base.add_exception(self) #allow for player collision
+	base.add_exception(self) #allow for player collision
 
 # processing thread
 func _fixed_process(delta):
 	if keydown_mouseleft and mouse_is_over:
-		mousepoint = self.get_local_mouse_pos()
-		mouse_distance = self.get_pos().distance_to(mousepoint)
 		is_dragging = true
+		
+	mousepoint = self.get_local_mouse_pos()
+	mouse_distance = self.get_pos().distance_to(mousepoint)
 
-	if not keydown_mouseleft or not mouse_is_over:
-		#self.set_linear_velocity(mousepoint)
-		is_dragging = false
 
 # called when there is any input on the player
 func _input(event):
@@ -40,7 +38,7 @@ func _input(event):
 			print("setting linear velocity")
 			print(mousepoint)
 			print(mouse_distance)
-			self.set_linear_velocity(mousepoint)
+			self.set_linear_velocity(-mousepoint)
 			
 		keydown_mouseleft = false
 		is_dragging = false
@@ -52,6 +50,5 @@ func _mouse_enter():
 
 # called when the mouse exits the player
 func _mouse_exit():
-	print("mouse exit")
-	if not is_dragging: 
-		mouse_is_over = false
+	print("mouse exit") 
+	mouse_is_over = false
