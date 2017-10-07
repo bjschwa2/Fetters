@@ -30,25 +30,19 @@ func _fixed_process(delta):
 # called when there is any input on the player
 func _input(event):
 	if event.is_action_pressed("mouse_down"): 
-		print("mouse pressed")
 		keydown_mouseleft = true
 	if event.is_action_released("mouse_down"):
-		print("mouse released")
 		if is_dragging:
-			print("setting linear velocity")
-			print(mousepoint)
-			print(mouse_distance)
-			self.set_linear_velocity(-mousepoint)
+			if base.is_colliding():
+				self.set_linear_velocity(-mousepoint*2)
 			
 		keydown_mouseleft = false
 		is_dragging = false
 		
 # called when the mouse enters the player		
 func _mouse_enter():
-	print("mouse enter")
 	mouse_is_over = true
 
 # called when the mouse exits the player
 func _mouse_exit():
-	print("mouse exit") 
 	mouse_is_over = false

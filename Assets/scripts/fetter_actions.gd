@@ -1,14 +1,10 @@
 extends RigidBody2D
 
 func _ready():
-	connect("body_enter", self, "_on_body_enter")
-	set_fixed_process(true)
+	connect("body_enter",self,"_body_enter")
 
-func _fixed_process(delta):
-	pass
-
-func _on_body_enter( body ):
-	print("body entered")
+func _body_enter( body ):
 	if body == Globals.get("Player"):
-		Globals.get("Player").set_mass( Globals.get("Player").get_mass() +1 )
-		print(Globals.get("Player").get_mass())
+		Globals.get("Player").set_gravity_scale(Globals.get("Player").get_gravity_scale() *1.1 )
+		print(Globals.get("Player").get_gravity_scale())
+		#queue_free()
