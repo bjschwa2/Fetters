@@ -1,0 +1,215 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://menu/menu.gd" type="Script" id=1]
+[ext_resource path="res://gfx/background_placeholder.jpg" type="Texture" id=2]
+[ext_resource path="res://gfx/logo_placeholder.png" type="Texture" id=3]
+[ext_resource path="res://menu/levelSelectButton.gd" type="Script" id=4]
+
+[sub_resource type="Animation" id=1]
+
+resource/name = "background"
+length = 8.0
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("background:region_rect")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 7.31736 ),
+"transitions": FloatArray( 1 ),
+"update": 0,
+"values": [ Rect2( 0, 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("background:transform/pos")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = {
+"times": FloatArray( 0, 8 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -100.211, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("background:transform/rot")
+tracks/2/interp = 1
+tracks/2/imported = false
+tracks/2/keys = {
+"times": FloatArray( 0, 8 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
+}
+
+[node name="Menu" type="Control"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+script/script = ExtResource( 1 )
+screen_move_speed = 100
+
+[node name="backgroundLayer" type="CanvasLayer" parent="."]
+
+editor/display_folded = true
+layer = -1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+
+[node name="background" type="Sprite" parent="backgroundLayer"]
+
+transform/pos = Vector2( -27.597, 0 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="backgroundLayer"]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/background = SubResource( 1 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
+
+[node name="Main" type="VBoxContainer" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = -2.48191
+margin/top = 0.0
+margin/right = 995.964
+margin/bottom = 599.0
+alignment = 0
+
+[node name="TextureFrame" type="TextureFrame" parent="Main"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 998.0
+margin/bottom = 200.0
+texture = ExtResource( 3 )
+stretch_mode = 4
+
+[node name="Buttons" type="GridContainer" parent="Main"]
+
+rect/min_size = Vector2( 200, 200 )
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 1
+size_flags/vertical = 1
+margin/left = 399.0
+margin/top = 301.0
+margin/right = 599.0
+margin/bottom = 501.0
+custom_constants/vseparation = 10
+custom_constants/hseparation = 10
+columns = 1
+
+[node name="Levels" type="Button" parent="Main/Buttons"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 200.0
+margin/bottom = 200.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Play"
+flat = false
+
+[node name="Levels" type="ReferenceFrame" parent="."]
+
+editor/display_folded = true
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 1000.0
+margin/top = 0.0
+margin/right = 2000.0
+margin/bottom = 600.0
+
+[node name="back" type="Button" parent="Levels"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "BACK"
+flat = false
+
+[node name="items" type="VBoxContainer" parent="Levels"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 43.0
+margin/right = 998.0
+margin/bottom = 599.0
+alignment = 0
+
+[node name="levels" type="GridContainer" parent="Levels/items"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 998.0
+margin/bottom = 554.0
+columns = 1
+
+[node name="level_select" type="TextureButton" parent="Levels/items/levels"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+params/resize_mode = 0
+params/stretch_mode = 0
+script/script = ExtResource( 4 )
+
+[node name="homeTween" type="Tween" parent="."]
+
+playback/process_mode = 1
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
+
+
