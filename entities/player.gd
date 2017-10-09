@@ -16,7 +16,7 @@ func _ready():
 	set_process_input(true)
 	set_fixed_process(true)
 	base = get_node("Base")
-	base.add_exception(self) #allow for player collision
+	#base.add_exception(self) #allow for player collision
 
 # processing thread
 func _fixed_process(delta):
