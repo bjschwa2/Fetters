@@ -8,7 +8,6 @@ var popup_running = false
 
 onready var timer = get_node("timer")
 onready var popup = get_node("popup")
-#onready var lookaround = get_node("lookaround")
 onready var level_holder = get_node("../levelHolder")
 onready var player = get_node("../playerHolder/player")
 
@@ -47,7 +46,10 @@ func _input(event):
 		popup_button_pressed("next")
 	if event.is_action_pressed("exit"):
 		popup_button_pressed("menu")
-		
+
+func update_counters():
+	pass
+
 
 func popup_button_pressed(name): # Actions for different popup buttons
 	if name == "retry":
@@ -80,6 +82,40 @@ func set_disabled(disable):
 		if node extends Button:
 			node.set_disabled(disable)
 			
-func update_counters():
-	pass
+func prompt_retry_level(wait = 0):
+	if not popup_running or allow_next_level:
+		allow_next_level = false
+		show_popup("You died", "Your robot was destroyed!\n Do you want to try again?", wait)
+
+func prompt_finish_level(turns = 1, has_more_levels = true, wait = 0):
+	if not popup_running:
+		allow_next_level = has_more_levels
+		
+		var body_text = str("Level passed in ", turns, " turns.")
+		if !has_more_levels:
+			body_text = str(body_text, "\nYou completed all the levels of this pack. Select another pack to play in the level selection menu.")
+		
+		show_popup("Good job!", body_text, wait)
+
+func show_popup(title, text, wait): # Show a popup with title and text, after some time
+	popup_running = true
+	if timer.is_connected("timeout", self, "_show_popup"):
+		timer.disconnect("timeout", self, "_show_popup")
+	if wait > 0:
+		timer.set_wait_time(wait)
+		timer.connect("timeout", self, "_show_popup", [title, text], CONNECT_ONESHOT)
+		timer.start()
+	else:
+		_show_popup(title, text)
+
+func _show_popup(title, text): # Show a popup with title and text
+	set_disabled(true)
+	get_tree().set_pause(true)
 	
+	popup.get_node("popup_node/header/title").set_text(title)
+	popup.get_node("popup_node/body/container/text").set_text(text)
+	popup.get_node("popup_node/body/container/level_buttons/next").set_hidden(!allow_next_level)
+	
+	popup.get_node("AnimationPlayer").play("show_popup")
+	popup.show()
+

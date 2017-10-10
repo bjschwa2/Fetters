@@ -1,4 +1,5 @@
-extends RigidBody2D
+extends "entity.gd"
+
 
 # class member variables:
 var base
@@ -46,3 +47,18 @@ func _mouse_enter():
 # called when the mouse exits the player
 func _mouse_exit():
 	mouse_is_over = false
+
+
+func level_load(level_node):
+	
+	tilemap = level_node.get_node("tileMap") # Get the tilemap
+	
+	# Set the limits for the camera
+	
+	#var top_left_pos = level_node.get_node("camera_start").get_pos()
+	#var bottom_right_pos = level_node.get_node("camera_end").get_pos()
+	#camera.set_limit(MARGIN_TOP, top_left_pos.y)
+	#camera.set_limit(MARGIN_BOTTOM, bottom_right_pos.y)
+	
+	# Reset variables
+	set_fixed_process(true)

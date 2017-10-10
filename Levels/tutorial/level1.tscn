@@ -24,6 +24,8 @@ tile_data = IntArray(  )
 
 [node name="startPosition" type="Position2D" parent="."]
 
+transform/pos = Vector2( 500, 300 )
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 layer = 1

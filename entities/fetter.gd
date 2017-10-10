@@ -1,4 +1,5 @@
-extends RigidBody2D
+extends "entity.gd"
+
 
 func _ready():
 	connect("body_enter",self,"_body_enter")
