@@ -1,7 +1,7 @@
 
 extends Control
 
-export(String, FILE) var packs_file_path = "res://levels/packs.txt"
+export(String, FILE) var packs_file_path = "res://Levels/packs.txt"
 export(String, DIR) var level_packs_dir_path = "res://Levels"
 export(String) var names_file_name = "names.txt"
 export(PackedScene) var level_select_button_scene = preload("levelSelectButton.tscn")
