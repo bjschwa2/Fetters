@@ -18,7 +18,7 @@ var goals_taken = {} # The taken amounts of different goals
 var goal_wait = 0
 
 onready var gui = get_node("../gui")
-onready var player = get_node("../player_holder/player")
+onready var player = get_node("../playerHolder/player")
 onready var raw_packs = fileManager.get_file_lines("res://Levels/packs.txt")
 
 func _ready():

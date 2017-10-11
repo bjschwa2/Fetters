@@ -137,7 +137,7 @@ params/stretch_mode = 0
 
 visibility/visible = false
 
-[node name="Timer" type="Timer" parent="gui"]
+[node name="timer" type="Timer" parent="gui"]
 
 process_mode = 1
 wait_time = 1.0

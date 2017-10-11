@@ -16,7 +16,7 @@ func _ready():
 	Globals.set("Player", self)
 	set_process_input(true)
 	set_fixed_process(true)
-	base = get_node("Base")
+	base = get_node("base")
 	#base.add_exception(self) #allow for player collision
 
 # processing thread
